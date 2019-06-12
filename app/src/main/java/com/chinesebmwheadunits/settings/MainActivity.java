@@ -8,6 +8,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
@@ -20,6 +21,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -104,9 +107,11 @@ public class MainActivity extends AppCompatActivity
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
 
         if (id == R.id.nav_home) {
-            navController.navigateUp();
+            Uri link = Uri.parse("android-app://com.chinesebmwheadunits.settings/home");
+            navController.navigate(link);
         } else if (id == R.id.nav_gallery) {
-            navController.navigate(R.id.action_welcomeFragment_to_globalSettingsFragment);
+            Uri link = Uri.parse("android-app://com.chinesebmwheadunits.settings/globalSettings");
+            navController.navigate(link);
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_tools) {
