@@ -1,4 +1,4 @@
-package com.fred.bmwheadunitsettings;
+package com.chinesebmwheadunits.settings;
 
 import org.junit.Test;
 
