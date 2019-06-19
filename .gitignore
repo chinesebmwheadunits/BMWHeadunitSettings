@@ -1,9 +1,10 @@
+# OSX
+#
+.DS_Store
+
 # Xcode
-!**/*.xcodeproj
-!**/*.pbxproj
-!**/*.xcworkspacedata
-!**/*.xcsettings
-!**/*.xcscheme
+#
+build/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -21,56 +22,39 @@ DerivedData
 *.xcuserstate
 project.xcworkspace
 
-# Gradle
-/build/
-/RNTester/android/app/build/
-/RNTester/android/app/gradle/
-/RNTester/android/app/gradlew
-/RNTester/android/app/gradlew.bat
-/ReactAndroid/build/
-
-# Buck
-.buckd
-buck-out
-/ReactAndroid/src/main/jni/prebuilt/lib/armeabi-v7a/
-/ReactAndroid/src/main/jni/prebuilt/lib/x86/
-/ReactAndroid/src/main/gen
-
-# Watchman
-.watchmanconfig
-
-# Android
+# Android/IntelliJ
+#
+build/
 .idea
 .gradle
 local.properties
 *.iml
-/android/
 
-# Node
-node_modules
-*.log
-.nvm
-/bots/node_modules/
-package-lock.json
+# Visual Studio Code
+#
+.vscode/
 
-# OS X
-.DS_Store
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
 
-# Test generated files
-/ReactAndroid/src/androidTest/assets/AndroidTestBundle.js
-*.js.meta
+# BUCK
+buck-out/
+\.buckd/
+*.keystore
 
-/coverage
-/third-party
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://docs.fastlane.tools/best-practices/source-control/
 
-# Root dir shouldn't have Xcode project
-/*.xcodeproj
+*/fastlane/report.xml
+*/fastlane/Preview.html
+*/fastlane/screenshots
 
-# ReactCommon subdir shouldn't have Xcode project
-/ReactCommon/**/*.xcodeproj
-RNTester/build
-
-# CocoaPods
-/template/ios/Pods/
-/template/ios/Podfile.lock
-RNTester/RNTesterPods.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+# Bundle artifact
+*.jsbundle
