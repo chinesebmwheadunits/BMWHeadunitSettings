@@ -1,39 +1,27 @@
 import React from 'react';
-import { Button,StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-
-
-class HomeScreen extends React.Component {
-  render() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your settings app!</Text>
-      <Button
-          title="Go to Details"
-          onPress={() => this.props.navigation.navigate('Details')}
-        />
-    </View>
-  );
-  }
-}
-
-class DetailsScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Details Screen</Text>
-      </View>
-    );
-  }
-}
+import { Button, Text, View } from 'react-native';
+import { HomeScreen } from './app/screens/HomeScreen';
+import { SettingsScreen } from './app/screens/SettingsScreen';
+import { NavigationAppScreen } from './app/screens/NavigationAppScreen';
 
 const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
-    Details: DetailsScreen
+    Settings: SettingsScreen,
+    NavigationApps: NavigationAppScreen,
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: "Home",
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#00C',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
   }
 );
 
@@ -44,11 +32,3 @@ export default class App extends React.Component {
     return <AppContainer />;
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
