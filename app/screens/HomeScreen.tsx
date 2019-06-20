@@ -71,7 +71,7 @@ export class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
            <View> 
-             <Image
+             <Image style={{width: 256, height: 256, borderRadius: 24 }}
                 source={require('../../assets/icon.png')}
         />
         </View>

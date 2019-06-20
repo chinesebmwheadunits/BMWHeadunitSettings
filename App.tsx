@@ -4,6 +4,9 @@ import { Button, Text, View } from 'react-native';
 import { HomeScreen } from './app/screens/HomeScreen';
 import { SettingsScreen } from './app/screens/SettingsScreen';
 import { NavigationAppScreen } from './app/screens/NavigationAppScreen';
+import { useScreens } from 'react-native-screens';
+
+useScreens();
 
 const AppNavigator = createStackNavigator(
   {
