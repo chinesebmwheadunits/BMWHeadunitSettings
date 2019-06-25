@@ -4,11 +4,11 @@
  */
 
 /**
- * Message types
+ * Action types
  */
-export const TASK_KILLER_UPDATED_MESSAGE = 'TASK_KILLER_UPDATED_MESSAGE'
-export const TELEPHONE_MUTE_UPDATED_MESSAGE = 'TELEPHONE_MUTE_UPDATED_MESSAGE'
-export const BRIGHTNESS_INTENTS_UPDATED_MESSAGE = 'BRIGHTNESS_INTENTS_UPDATED_MESSAGE'
+export const TASK_KILLER_UPDATED = 'TASK_KILLER_UPDATED'
+export const TELEPHONE_MUTE_UPDATED = 'TELEPHONE_MUTE_UPDATED'
+export const BRIGHTNESS_INTENTS_UPDATED = 'BRIGHTNESS_INTENTS_UPDATED'
 
 /**
  * Settings state interface.
@@ -32,7 +32,7 @@ const initialState: ISettingsState = {
  * Update action for the task killer value.
  */
 interface TaskKillerUpdatedAction {
-  type: typeof TASK_KILLER_UPDATED_MESSAGE
+  type: typeof TASK_KILLER_UPDATED
   value: boolean
 }
 
@@ -40,7 +40,7 @@ interface TaskKillerUpdatedAction {
  * Update action for the telephone muted value.
  */
 interface TelephoneMutedUpdatedAction {
-  type: typeof TELEPHONE_MUTE_UPDATED_MESSAGE
+  type: typeof TELEPHONE_MUTE_UPDATED
   value: boolean
 }
 
@@ -48,7 +48,7 @@ interface TelephoneMutedUpdatedAction {
  * Update action for the brightness intents value.
  */
 interface BrightnessIntentsUpdatedAction {
-    type: typeof BRIGHTNESS_INTENTS_UPDATED_MESSAGE
+    type: typeof BRIGHTNESS_INTENTS_UPDATED
     value: boolean
   }
 
@@ -65,19 +65,19 @@ export type SettingsActionTypes = TaskKillerUpdatedAction | TelephoneMutedUpdate
 export function settingsReducer(state = initialState, action: SettingsActionTypes) : ISettingsState {
     switch (action.type)
     {
-        case "TASK_KILLER_UPDATED_MESSAGE":
+        case TASK_KILLER_UPDATED:
             return {
                 taskKillerEnabled: action.value,
                 brightnessIntentsEnabled : state.brightnessIntentsEnabled,
                 telephoneMuteEnabled : state.telephoneMuteEnabled
             };
-        case "TELEPHONE_MUTE_UPDATED_MESSAGE":
+        case TELEPHONE_MUTE_UPDATED:
             return {
                 taskKillerEnabled: state.taskKillerEnabled,
                 brightnessIntentsEnabled : action.value,
                 telephoneMuteEnabled : state.telephoneMuteEnabled
             };
-        case "BRIGHTNESS_INTENTS_UPDATED_MESSAGE":
+        case BRIGHTNESS_INTENTS_UPDATED:
                 return {
                     taskKillerEnabled: state.taskKillerEnabled,
                     brightnessIntentsEnabled : state.brightnessIntentsEnabled,

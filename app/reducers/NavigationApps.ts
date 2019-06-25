@@ -6,7 +6,7 @@
 /**
  * Message types
  */
-export const NAVIGATION_APP_UPDATED_MESSAGE = 'NAVIGATION_APP_UPDATED_MESSAGE'
+export const NAVIGATION_APP_UPDATED = 'NAVIGATION_APP_UPDATED'
 
 /**
  * INavigationAppListItem interface.
@@ -36,7 +36,7 @@ const initialState: INavigationAppState = {
  * Update action for the task killer value.
  */
 interface NavigationAppUpdatedAction {
-  type: typeof NAVIGATION_APP_UPDATED_MESSAGE
+  type: typeof NAVIGATION_APP_UPDATED
   key: string,
   value: boolean
 }
@@ -55,7 +55,7 @@ export type NavigationAppsActionTypes = NavigationAppUpdatedAction
 export function navigationAppsReducer(state = initialState, action: NavigationAppsActionTypes) : INavigationAppState {
     switch (action.type)
     {
-        case NAVIGATION_APP_UPDATED_MESSAGE:
+        case NAVIGATION_APP_UPDATED:
             return {
                 items: state.items.map(item =>
                     item.name === action.key ? {
