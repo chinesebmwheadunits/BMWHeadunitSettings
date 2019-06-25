@@ -83,5 +83,6 @@ export function settingsReducer(state = initialState, action: SettingsActionType
                     brightnessIntentsEnabled : state.brightnessIntentsEnabled,
                     telephoneMuteEnabled : action.value,
                 };
+        default: return state;
     }
 }

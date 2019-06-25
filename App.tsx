@@ -5,6 +5,8 @@ import { HomeScreen } from './app/screens/HomeScreen';
 import { SettingsScreen } from './app/screens/SettingsScreen';
 import { NavigationAppsScreen } from './app/screens/NavigationAppsScreen';
 import { useScreens } from 'react-native-screens';
+import { Provider } from 'react-redux';
+import store from './app/store'
 
 useScreens();
 
@@ -32,6 +34,10 @@ const AppContainer = createAppContainer(AppNavigator);
 
 export default class App extends React.Component {
   render() {
-    return <AppContainer />;
+    return (
+    <Provider store={store}>
+    <AppContainer />
+    </Provider>
+    );
   }
 }

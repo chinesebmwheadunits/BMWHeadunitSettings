@@ -1,5 +1,5 @@
 /**
- * App.ts
+ * app.ts
  * Copyright Jan-Willem Spuij. All rights reserved.
  */
 import { createStore } from "redux"

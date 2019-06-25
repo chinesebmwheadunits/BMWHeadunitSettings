@@ -66,5 +66,6 @@ export function navigationAppsReducer(state = initialState, action: NavigationAp
                     } : item
                 )
             }
+        default: return state;
     }
 }
