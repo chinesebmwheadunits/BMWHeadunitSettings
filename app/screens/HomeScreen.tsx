@@ -26,18 +26,20 @@ const styles = StyleSheet.create({
  * Component for the home screen.
  */
 export class HomeScreen extends React.PureComponent {
-    static _menu = null;
+    
+    static _menu: any = null;
 
-    static setMenuRef = ref => {
+    static setMenuRef = (ref: null) => {
         HomeScreen._menu = ref;
     };
 
     static hideMenu = () => {
-        HomeScreen._menu.hide();
+            HomeScreen._menu!.hide();
     };
 
     static showMenu = () => {
-        HomeScreen._menu.show();
+        if (HomeScreen && HomeScreen._menu)
+            HomeScreen._menu!.show();
     };
 
     static navigationOptions = ({ navigation }: NavigationScreenProps) => ({
