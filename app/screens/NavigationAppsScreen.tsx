@@ -1,5 +1,5 @@
 /**
- * NavigationAppScreen.tsx
+ * NavigationAppsScreen.tsx
  * Copyright Jan-Willem Spuij. All rights reserved.
  */
 import { StyleSheet, Text, Image, View, Switch, FlatList } from "react-native";
@@ -45,7 +45,7 @@ import { array } from "prop-types";
 /**
  * Screen state for the NavigationApp screen.
  */
- class NavigationAppScreenState {
+ class NavigationAppsScreenState {
     list = 
      [
         {key: 'Maps', package: 'com.google.android.apps.maps', icon: require('../../assets/maps.png'), enabled: true},
@@ -57,9 +57,9 @@ import { array } from "prop-types";
 /**
  * Component for the navigation app screen.
  */
-export class NavigationAppScreen extends React.Component<object, NavigationAppScreenState> {
+export class NavigationAppsScreen extends React.Component<object, NavigationAppsScreenState> {
     
-    readonly state = new NavigationAppScreenState();
+    readonly state = new NavigationAppsScreenState();
 
     static navigationOptions: NavigationStackScreenOptions = {
         title: 'Navigation Apps',

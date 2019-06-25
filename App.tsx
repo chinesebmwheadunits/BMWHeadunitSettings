@@ -3,7 +3,7 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { Button, Text, View } from 'react-native';
 import { HomeScreen } from './app/screens/HomeScreen';
 import { SettingsScreen } from './app/screens/SettingsScreen';
-import { NavigationAppScreen } from './app/screens/NavigationAppScreen';
+import { NavigationAppsScreen } from './app/screens/NavigationAppsScreen';
 import { useScreens } from 'react-native-screens';
 
 useScreens();
@@ -12,7 +12,7 @@ const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
     Settings: SettingsScreen,
-    NavigationApps: NavigationAppScreen,
+    NavigationApps: NavigationAppsScreen,
   },
   {
     initialRouteName: "Home",
