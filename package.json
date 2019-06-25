@@ -16,7 +16,8 @@
     "react-native-settings-page": "^2.0.6",
     "react-native-vector-icons": "^6.5.0",
     "react-native-web": "^0.11.4",
-    "react-navigation": "^3.11.0"
+    "react-navigation": "^3.11.0",
+    "react-redux": "^7.1.0"
   },
   "devDependencies": {
     "@types/react": "^16.8.19",

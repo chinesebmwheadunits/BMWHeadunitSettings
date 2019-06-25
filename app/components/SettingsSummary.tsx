@@ -1,4 +1,3 @@
-
 /**
  * SettingsSummary.tsx
  * Copyright Jan-Willem Spuij. All rights reserved.
@@ -40,7 +39,7 @@ const styles = StyleSheet.create({
  *  Settings summary Component. Displays a summery
  *  on the home screen.
  */
- export default class SettingsSummary extends React.Component<object, SettingsSummaryState> {
+ export default class SettingsSummary extends React.PureComponent<object, SettingsSummaryState> {
 
     /**
      * State.

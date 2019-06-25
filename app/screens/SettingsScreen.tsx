@@ -14,7 +14,7 @@ import React from "react";
 /**
  * Interface with the properties for the settings screen.
  */
-export interface SettingsScreenProps {
+export interface ISettingsScreenProps {
     navigation: NavigationScreenProp<any,any>
   };
 
@@ -30,7 +30,7 @@ export interface SettingsScreenProps {
 /**
  * Component for the settings screen.
  */
-export class SettingsScreen extends React.PureComponent<SettingsScreenProps, SettingsScreenState> {
+export class SettingsScreen extends React.PureComponent<ISettingsScreenProps, SettingsScreenState> {
     static readonly navigationOptions: NavigationStackScreenOptions = {
         title: 'Settings',
       }

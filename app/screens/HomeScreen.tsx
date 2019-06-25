@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 /**
  * Component for the home screen.
  */
-export class HomeScreen extends React.Component {
+export class HomeScreen extends React.PureComponent {
     static _menu = null;
 
     static setMenuRef = ref => {

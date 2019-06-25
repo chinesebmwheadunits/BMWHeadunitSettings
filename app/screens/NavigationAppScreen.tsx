@@ -5,6 +5,8 @@
 import { StyleSheet, Text, Image, View, Switch, FlatList } from "react-native";
 import { NavigationStackScreenOptions } from 'react-navigation';
 import React from "react";
+import NavigationAppListItem from '../components/NavigationAppListItem'
+import { array } from "prop-types";
 
   const styles = StyleSheet.create({
     container: {
@@ -39,23 +41,41 @@ import React from "react";
     color: '#AAA'
     },
   })
+
 /**
- * Component for the settings screen.
+ * Screen state for the NavigationApp screen.
  */
-export class NavigationAppScreen extends React.Component {
+ class NavigationAppScreenState {
+    list = 
+     [
+        {key: 'Maps', package: 'com.google.android.apps.maps', icon: require('../../assets/maps.png'), enabled: true},
+        {key: 'Sygic', package: 'com.waze', icon: require('../../assets/sygic.png'), enabled: false},
+        {key: 'Waze', package: 'com.sygic.aura', icon: require('../../assets/waze.png'), enabled: true}
+      ];
+ }
+  
+/**
+ * Component for the navigation app screen.
+ */
+export class NavigationAppScreen extends React.Component<object, NavigationAppScreenState> {
+    
+    readonly state = new NavigationAppScreenState();
+
     static navigationOptions: NavigationStackScreenOptions = {
         title: 'Navigation Apps',
       }
+
+    valueChanged = (name: string, value: boolean) => {
+        this.setState({ list: this.state.list.map(item => item.key == name ? { key: item.key, package: item.package, icon: item.icon, enabled: value } : item )});
+    };
+
+
   render() {
     return (
         <View style={styles.container}>
          <FlatList
-          data={[
-            {key: 'Maps', package: 'com.google.android.apps.maps', icon: require('../../assets/maps.png')},
-            {key: 'Sygic', package: 'com.waze', icon: require('../../assets/sygic.png')},
-            {key: 'Waze', package: 'com.sygic.aura', icon: require('../../assets/waze.png')}
-          ]}
-          renderItem={({item}) => <View style={styles.item}><Image style={styles.icon} source={item.icon} /><View style={styles.textView}><Text style={styles.title}>{item.key}</Text><Text style={styles.subtitle}>{item.package}</Text></View><Switch ></Switch></View>}
+          data={this.state.list}
+          renderItem={({item}) => <NavigationAppListItem name={item.key} package={item.package} icon={item.icon} value={item.enabled} onValueChanged={this.valueChanged} />}
         />  
       </View>
     );
