@@ -3,7 +3,7 @@
  * Copyright Jan-Willem Spuij. All rights reserved.
  */
 import { StyleSheet, Text, View } from "react-native";
-import { NavigationStackScreenOptions } from 'react-navigation';
+import { NavigationStackScreenOptions, NavigationScreenProp } from 'react-navigation';
 import ReactNativeSettingsPage, { 
     SectionRow, 
     SwitchRow,
@@ -12,11 +12,17 @@ import ReactNativeSettingsPage, {
 } from 'react-native-settings-page';
 import React from "react";
 
+/**
+ * Interface with the properties for the settings screen.
+ */
+export interface SettingsScreenProps {
+    navigation: NavigationScreenProp<any,any>
+  };
 
 /**
  * Component for the settings screen.
  */
-export class SettingsScreen extends React.Component {
+export class SettingsScreen extends React.Component<SettingsScreenProps, object> {
     static navigationOptions: NavigationStackScreenOptions = {
         title: 'Settings',
       }
