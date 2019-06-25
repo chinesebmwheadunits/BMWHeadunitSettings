@@ -8,7 +8,6 @@ import ReactNativeSettingsPage, {
     SectionRow, 
     SwitchRow,
 	NavigateRow,
-	CheckRow
 } from 'react-native-settings-page';
 import React from "react";
 
@@ -20,12 +19,54 @@ export interface SettingsScreenProps {
   };
 
 /**
+ * Class with state for the settings screen.
+ */
+ class SettingsScreenState {
+    taskKillerEnabled: boolean = true;
+    telephoneMuteEnabled: boolean= true;
+    brightnessIntentsEnabled: boolean = true;
+}
+
+/**
  * Component for the settings screen.
  */
-export class SettingsScreen extends React.Component<SettingsScreenProps, object> {
-    static navigationOptions: NavigationStackScreenOptions = {
+export class SettingsScreen extends React.PureComponent<SettingsScreenProps, SettingsScreenState> {
+    static readonly navigationOptions: NavigationStackScreenOptions = {
         title: 'Settings',
       }
+
+    /**
+     * State for this component.
+     */
+    readonly state = new SettingsScreenState();
+
+    /**
+     * Handles task killer value change.
+     */
+    readonly taskKillerValueChange = (value: boolean) => {
+        this.setState({
+            taskKillerEnabled: value,
+        });
+    }
+
+    /**
+     * Handles Telephone mute value change.
+     */
+    readonly telephoneMuteValueChange = (value: boolean) => {
+        this.setState({
+            telephoneMuteEnabled: value,
+        });
+    }
+
+    /**
+     * Handles Brightness intents value change.
+     */
+    readonly brightnessIntentsValueChange = (value: boolean) => {
+        this.setState({
+            brightnessIntentsEnabled: value,
+        });
+    }
+
   render() {
     return (
         <ReactNativeSettingsPage>
@@ -33,16 +74,15 @@ export class SettingsScreen extends React.Component<SettingsScreenProps, object>
             <SwitchRow 
                 text='Enable the task killer' 
                 iconName='hand-stop-o'
-                _value={false}
-                _onValueChange={() => { } } />
-            
+                _value={this.state.taskKillerEnabled}
+                _onValueChange={this.taskKillerValueChange} />            
         </SectionRow>
         <SectionRow text='Navigation'>
             <SwitchRow 
                 text='Enable telephone mute for navigation' 
                 iconName='volume-off'
-                _value={false}
-                _onValueChange={() => { } } />
+                _value={this.state.telephoneMuteEnabled}
+                _onValueChange={this.telephoneMuteValueChange} />
             <NavigateRow
                 text='Select navigation apps'
                 iconName={'map'}
@@ -52,9 +92,8 @@ export class SettingsScreen extends React.Component<SettingsScreenProps, object>
             <SwitchRow 
                 text='Enable intents for controlling backlight' 
                 iconName='comments-o'
-                _value={false}
-                _onValueChange={() => { } } />
-            
+                _value={this.state.brightnessIntentsEnabled}
+                _onValueChange={this.brightnessIntentsValueChange} />          
         </SectionRow>
     </ReactNativeSettingsPage>
     );
