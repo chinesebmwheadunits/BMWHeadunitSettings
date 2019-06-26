@@ -43,7 +43,7 @@ export class HomeScreen extends React.PureComponent {
             HomeScreen._menu!.show();
     };
 
-    static navigationOptions = ({ navigation }: NavigationScreenProps) => ({
+    static readonly navigationOptions = ({ navigation }: NavigationScreenProps) => ({
       title: 'Home',
       headerRight: (
         <Menu

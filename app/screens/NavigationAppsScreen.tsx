@@ -3,7 +3,7 @@
  * Copyright Jan-Willem Spuij. All rights reserved.
  */
 import { StyleSheet, Text, Image, View, Switch, FlatList } from "react-native";
-import { NavigationStackScreenOptions } from 'react-navigation';
+import { NavigationScreenOptions } from 'react-navigation';
 import React from "react";
 import NavigationAppListItem from '../components/NavigationAppListItem'
 import { observer, Observer } from "mobx-react";
@@ -57,13 +57,13 @@ export interface INavigationAppsProps
  * Component for the navigation app screen.
  */
 @observer
-export class NavigationAppsScreen extends React.Component<INavigationAppsProps, any> {
+export class NavigationAppsScreen extends React.PureComponent<INavigationAppsProps, any> {
 
     @computed get navigationAppList() {
         return Array.from(this.props.navigationAppStore.items.values())
     } 
 
-    static navigationOptions: NavigationStackScreenOptions = {
+    static readonly navigationOptions: NavigationScreenOptions = {
         title: 'Navigation Apps',
       }
 

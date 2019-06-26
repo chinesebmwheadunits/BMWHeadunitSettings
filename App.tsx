@@ -17,10 +17,16 @@ navigationAppStore.items.set('com.sygic.aura', {name: 'Sygic', package: 'com.syg
 const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
-    Settings: (props: { navigation: NavigationScreenProp<any, any>; }) => <SettingsScreen navigation={props.navigation} setting={settingStore.item} />,
-    NavigationApps: (props: { navigation: NavigationScreenProp<any, any>; }) => <NavigationAppsScreen navigationAppStore={navigationAppStore} />,
+    Settings: {
+            screen: (props: { navigation: NavigationScreenProp<any, any>; }) => <SettingsScreen navigation={props.navigation} setting={settingStore.item} />,
+            navigationOptions: SettingsScreen.navigationOptions,
+    },
+    NavigationApps: {
+        screen: (props: { navigation: NavigationScreenProp<any, any>; }) => <NavigationAppsScreen navigationAppStore={navigationAppStore} />,
+        navigationOptions: NavigationAppsScreen.navigationOptions,
+    }, 
   },
-  {
+    {
     initialRouteName: "Home",
     defaultNavigationOptions: {
       headerStyle: {
