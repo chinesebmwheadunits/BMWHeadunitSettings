@@ -2,7 +2,6 @@
  * SettingsScreen.tsx
  * Copyright Jan-Willem Spuij. All rights reserved.
  */
-import { StyleSheet, Text, View } from "react-native";
 import { NavigationStackScreenOptions, NavigationScreenProp } from 'react-navigation';
 import ReactNativeSettingsPage, { 
     SectionRow, 
@@ -10,61 +9,46 @@ import ReactNativeSettingsPage, {
 	NavigateRow,
 } from 'react-native-settings-page';
 import React from "react";
+import { Setting } from "../models/Setting";
+import { observer } from "mobx-react";
 
 /**
  * Interface with the properties for the settings screen.
  */
 export interface ISettingsScreenProps {
     navigation: NavigationScreenProp<any,any>
+    setting : Setting
   };
 
-/**
- * Class with state for the settings screen.
- */
- class SettingsScreenState {
-    taskKillerEnabled: boolean = true;
-    telephoneMuteEnabled: boolean= true;
-    brightnessIntentsEnabled: boolean = true;
-}
 
 /**
  * Component for the settings screen.
  */
-export class SettingsScreen extends React.PureComponent<ISettingsScreenProps, SettingsScreenState> {
+@observer
+export class SettingsScreen extends React.PureComponent<ISettingsScreenProps, any> {
     static readonly navigationOptions: NavigationStackScreenOptions = {
         title: 'Settings',
       }
 
     /**
-     * State for this component.
-     */
-    readonly state = new SettingsScreenState();
-
-    /**
      * Handles task killer value change.
      */
     readonly taskKillerValueChange = (value: boolean) => {
-        this.setState({
-            taskKillerEnabled: value,
-        });
+       this.props.setting.taskKillerEnabled = value;
     }
 
     /**
      * Handles Telephone mute value change.
      */
     readonly telephoneMuteValueChange = (value: boolean) => {
-        this.setState({
-            telephoneMuteEnabled: value,
-        });
+        this.props.setting.telephoneMuteEnabled = value;
     }
 
     /**
      * Handles Brightness intents value change.
      */
     readonly brightnessIntentsValueChange = (value: boolean) => {
-        this.setState({
-            brightnessIntentsEnabled: value,
-        });
+        this.props.setting.brightnessIntentsEnabled = value;
     }
 
   render() {
@@ -74,14 +58,14 @@ export class SettingsScreen extends React.PureComponent<ISettingsScreenProps, Se
             <SwitchRow 
                 text='Enable the task killer' 
                 iconName='hand-stop-o'
-                _value={this.state.taskKillerEnabled}
+                _value={this.props.setting.taskKillerEnabled}
                 _onValueChange={this.taskKillerValueChange} />            
         </SectionRow>
         <SectionRow text='Navigation'>
             <SwitchRow 
                 text='Enable telephone mute for navigation' 
                 iconName='volume-off'
-                _value={this.state.telephoneMuteEnabled}
+                _value={this.props.setting.telephoneMuteEnabled}
                 _onValueChange={this.telephoneMuteValueChange} />
             <NavigateRow
                 text='Select navigation apps'
@@ -92,7 +76,7 @@ export class SettingsScreen extends React.PureComponent<ISettingsScreenProps, Se
             <SwitchRow 
                 text='Enable intents for controlling backlight' 
                 iconName='comments-o'
-                _value={this.state.brightnessIntentsEnabled}
+                _value={this.props.setting.brightnessIntentsEnabled}
                 _onValueChange={this.brightnessIntentsValueChange} />          
         </SectionRow>
     </ReactNativeSettingsPage>

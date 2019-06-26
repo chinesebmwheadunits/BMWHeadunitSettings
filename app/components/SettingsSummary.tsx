@@ -4,6 +4,9 @@
  */
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { observer } from 'mobx-react';
+import { Setting } from "../models/Setting";
+import { computed } from "mobx";
 
 const styles = StyleSheet.create({
     settingsSummary: {
@@ -34,25 +37,43 @@ const styles = StyleSheet.create({
     telephoneMuteEnabled: boolean= true;
     brightnessIntentsEnabled: boolean = true;
 }
+
+/**
+ * Interface for properties for settings summary.
+ */
+export interface SettingsSummaryProps {
+    setting: Setting;
+}
   
 /**
  *  Settings summary Component. Displays a summery
  *  on the home screen.
  */
- export default class SettingsSummary extends React.PureComponent<object, SettingsSummaryState> {
+@observer
+ export default class SettingsSummary extends React.PureComponent<SettingsSummaryProps, SettingsSummaryState> {
 
     /**
      * State.
      */
     readonly state = new SettingsSummaryState();
 
+    @computed get taskKillerEnabled() {
+        return this.props.setting.taskKillerEnabled ? 'enabled' : 'disabled';
+    }
+    @computed get telephoneMuteEnabled() {
+        return this.props.setting.telephoneMuteEnabled ? 'enabled' : 'disabled';
+    }
+    @computed get brightnessIntentsEnabled() {
+        return this.props.setting.brightnessIntentsEnabled ? 'enabled' : 'disabled';
+    }
+
     render() {
         return (
             <View style={styles.settingsSummary}>
             <Text style={styles.title}>Chinese BMW head unit settings</Text>
-            <View style={styles.settingsRow}><Text style={styles.settingsText}>Task killer:</Text><Text style={styles.settingsText}>{this.state.taskKillerEnabled ? 'enabled' : 'disabled'}</Text></View>
-            <View style={styles.settingsRow}><Text style={styles.settingsText}>Telephone mute for navigation:</Text><Text style={styles.settingsText}>{this.state.telephoneMuteEnabled ? 'enabled' : 'disabled'}</Text></View>
-            <View style={styles.settingsRow}><Text style={styles.settingsText}>Brightness intents:</Text><Text style={styles.settingsText}>{this.state.brightnessIntentsEnabled ? 'enabled' : 'disabled'}</Text></View>
+            <View style={styles.settingsRow}><Text style={styles.settingsText}>Task killer:</Text><Text style={styles.settingsText}>{this.taskKillerEnabled}</Text></View>
+            <View style={styles.settingsRow}><Text style={styles.settingsText}>Telephone mute for navigation:</Text><Text style={styles.settingsText}>{this.telephoneMuteEnabled}</Text></View>
+            <View style={styles.settingsRow}><Text style={styles.settingsText}>Brightness intents:</Text><Text style={styles.settingsText}>{this.brightnessIntentsEnabled}</Text></View>
           </View>
         );
     }

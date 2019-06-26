@@ -3,11 +3,12 @@
  * Copyright Jan-Willem Spuij. All rights reserved.
  */
 import { Button, Image, StyleSheet, Text, View } from "react-native";
-import { NavigationStackScreenOptions, NavigationScreenProps } from 'react-navigation';
+import { NavigationStackScreenOptions, NavigationScreenProps, NavigationScreenProp } from 'react-navigation';
 import React from "react";
 import Menu, { MenuItem } from 'react-native-material-menu';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import SettingsSummary from '../components/SettingsSummary'
+import { SettingStoreContext } from "../stores/SettingStore";
 
 const styles = StyleSheet.create({
   container: { 
@@ -63,7 +64,11 @@ export class HomeScreen extends React.PureComponent {
                 source={require('../../assets/icon.png')}
         />
         </View>
-        <View style={styles.rightPart}><SettingsSummary /></View>   
+        <SettingStoreContext.Consumer>
+            { context =>
+                <View style={styles.rightPart}><SettingsSummary  setting={context.setting} /></View>
+            }
+        </SettingStoreContext.Consumer>
       </View>
     );
     }

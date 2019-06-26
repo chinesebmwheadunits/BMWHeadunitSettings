@@ -1,19 +1,17 @@
 import React from 'react';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { NavigationScreenProp, createStackNavigator, createAppContainer } from 'react-navigation';
 import { Button, Text, View } from 'react-native';
 import { HomeScreen } from './app/screens/HomeScreen';
 import { SettingsScreen } from './app/screens/SettingsScreen';
 import { NavigationAppsScreen } from './app/screens/NavigationAppsScreen';
 import { useScreens } from 'react-native-screens';
-import { Provider } from 'react-redux';
-import store from './app/store'
-
+import settingStore, { SettingStoreContext } from './app/stores/SettingStore'
 useScreens();
 
 const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
-    Settings: SettingsScreen,
+    Settings: (props: { navigation: NavigationScreenProp<any, any>; }) => <SettingsScreen navigation={props.navigation} setting={settingStore.setting} ></SettingsScreen>,
     NavigationApps: NavigationAppsScreen,
   },
   {
@@ -35,9 +33,9 @@ const AppContainer = createAppContainer(AppNavigator);
 export default class App extends React.Component {
   render() {
     return (
-    <Provider store={store}>
-    <AppContainer />
-    </Provider>
+        <SettingStoreContext.Provider value={settingStore}>
+        <AppContainer />
+        </SettingStoreContext.Provider>
     );
   }
 }
