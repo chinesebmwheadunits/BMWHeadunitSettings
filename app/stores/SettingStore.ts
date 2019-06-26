@@ -11,7 +11,7 @@ import React from "react";
  */
 class SettingStore {
 
-    @observable setting: Setting = new Setting();
+    @observable item: Setting = new Setting();
 
 }
 

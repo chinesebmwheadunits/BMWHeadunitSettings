@@ -6,7 +6,10 @@ import { StyleSheet, Text, Image, View, Switch, FlatList } from "react-native";
 import { NavigationStackScreenOptions } from 'react-navigation';
 import React from "react";
 import NavigationAppListItem from '../components/NavigationAppListItem'
-import { array } from "prop-types";
+import { observer, Observer } from "mobx-react";
+import { NavigationAppStore } from "../stores/NavigationAppStore";
+import { computed } from "mobx";
+import { NavigationApp } from '../models/NavigationApp'
 
   const styles = StyleSheet.create({
     container: {
@@ -43,39 +46,50 @@ import { array } from "prop-types";
   })
 
 /**
- * Screen state for the NavigationApp screen.
+ * Interface for properties for the Navigation Apps Screen
  */
- class NavigationAppsScreenState {
-    list = 
-     [
-        {key: 'Maps', package: 'com.google.android.apps.maps', icon: require('../../assets/maps.png'), enabled: true},
-        {key: 'Sygic', package: 'com.waze', icon: require('../../assets/sygic.png'), enabled: false},
-        {key: 'Waze', package: 'com.sygic.aura', icon: require('../../assets/waze.png'), enabled: true}
-      ];
- }
-  
+export interface INavigationAppsProps
+{
+    navigationAppStore: NavigationAppStore
+}
+
 /**
  * Component for the navigation app screen.
  */
-export class NavigationAppsScreen extends React.Component<object, NavigationAppsScreenState> {
-    
-    readonly state = new NavigationAppsScreenState();
+@observer
+export class NavigationAppsScreen extends React.Component<INavigationAppsProps, any> {
+
+    @computed get navigationAppList() {
+        return Array.from(this.props.navigationAppStore.items.values())
+    } 
 
     static navigationOptions: NavigationStackScreenOptions = {
         title: 'Navigation Apps',
       }
 
-    valueChanged = (name: string, value: boolean) => {
-        this.setState({ list: this.state.list.map(item => item.key == name ? { key: item.key, package: item.package, icon: item.icon, enabled: value } : item )});
+    keyExtractor = (item: NavigationApp, index: number) => item.package;
+
+    valueChanged = (key: string, value: boolean) => {
+        let navigationApp = this.props.navigationAppStore.items.get(key);
+        if (navigationApp !== undefined)
+        {
+            navigationApp.enabled = value;
+        }
     };
 
+    renderItem = ({item} : { item: NavigationApp}) => {
+        return  <Observer>{() => (
+            <NavigationAppListItem name={item.name} package={item.package} icon={item.icon} value={item.enabled} onValueChanged={this.valueChanged} />
+            )}</Observer>;
+    };
 
   render() {
     return (
         <View style={styles.container}>
          <FlatList
-          data={this.state.list}
-          renderItem={({item}) => <NavigationAppListItem name={item.key} package={item.package} icon={item.icon} value={item.enabled} onValueChanged={this.valueChanged} />}
+          data={this.navigationAppList}
+          keyExtractor={this.keyExtractor}
+          renderItem={this.renderItem}
         />  
       </View>
     );

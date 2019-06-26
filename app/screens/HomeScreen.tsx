@@ -66,7 +66,7 @@ export class HomeScreen extends React.PureComponent {
         </View>
         <SettingStoreContext.Consumer>
             { context =>
-                <View style={styles.rightPart}><SettingsSummary  setting={context.setting} /></View>
+                <View style={styles.rightPart}><SettingsSummary  setting={context.item} /></View>
             }
         </SettingStoreContext.Consumer>
       </View>

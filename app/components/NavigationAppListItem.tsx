@@ -42,7 +42,7 @@ export interface INavigationAppListItemProps {
     name: string;
     package: string;
     value: boolean;
-    onValueChanged: (name: string, value: boolean) => void;
+    onValueChanged: (key: string, value: boolean) => void;
 }
 
 /**
@@ -51,7 +51,7 @@ export interface INavigationAppListItemProps {
 export default class NavigationAppListItem extends React.PureComponent<INavigationAppListItemProps, object> {
     
     onSwitchValueChanged = (value: boolean) => {
-        this.props.onValueChanged(this.props.name, value);
+        this.props.onValueChanged(this.props.package, value);
     }
 
     render() {
