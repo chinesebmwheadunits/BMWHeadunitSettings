@@ -1,18 +1,27 @@
 /**
- * NavigationApp.tsx
+ * NavigationApp.ts
  * Copyright Jan-Willem Spuij. All rights reserved.
  */
 
-import { observable } from "mobx";
-import { ImageSourcePropType } from "react-native";
+import { types } from "mobx-state-tree";
 
 /**
  * Navigation App model.
  */
-export class NavigationApp {
-    name: string = '';
-    icon: ImageSourcePropType = {};
-    package : string = '';
-    @observable enabled: boolean = false;
-}
+export const NavigationApp = types.model({
+    name: "",
+    icon: "",
+    package: types.identifier,
+    enabled: false,
+}).actions(self =>({
+
+    /**
+     * Update enabled value for this Navigation App.
+     * @param value the new value.
+     */
+    updateEnabled(value: boolean)
+    {
+        self.enabled = value;
+    }
+}));
 

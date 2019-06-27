@@ -8,7 +8,8 @@ import React from "react";
 import Menu, { MenuItem } from 'react-native-material-menu';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import SettingsSummary from '../components/SettingsSummary'
-import { SettingStoreContext } from "../stores/SettingStore";
+import { SettingStore } from "../stores/SettingStore";
+import { Instance } from "mobx-state-tree";
 
 const styles = StyleSheet.create({
   container: { 
@@ -24,9 +25,17 @@ const styles = StyleSheet.create({
 });
 
 /**
+ * Interface with the properties for the settings screen.
+ */
+export interface IHomeScreenProps {
+  settingStore : Instance<typeof SettingStore>
+};
+
+
+/**
  * Component for the home screen.
  */
-export class HomeScreen extends React.PureComponent {
+export class HomeScreen extends React.PureComponent<IHomeScreenProps> {
     
     static _menu: any = null;
 
@@ -64,11 +73,7 @@ export class HomeScreen extends React.PureComponent {
                 source={require('../../assets/icon.png')}
         />
         </View>
-        <SettingStoreContext.Consumer>
-            { context =>
-                <View style={styles.rightPart}><SettingsSummary  setting={context.item} /></View>
-            }
-        </SettingStoreContext.Consumer>
+        <View style={styles.rightPart}><SettingsSummary  setting={this.props.settingStore.item} /></View>
       </View>
     );
     }

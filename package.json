@@ -11,6 +11,7 @@
     "expo": "^33.0.0",
     "mobx": "^5.10.1",
     "mobx-react": "^6.1.1",
+    "mobx-state-tree": "^3.14.0",
     "react": "16.8.3",
     "react-dom": "^16.8.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",

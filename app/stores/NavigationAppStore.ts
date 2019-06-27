@@ -1,20 +1,14 @@
 /**
- * NavigationAppStore.tsx
+ * NavigationAppStore.ts
  * Copyright Jan-Willem Spuij. All rights reserved.
  */
-import { observable } from "mobx";
+import { types } from "mobx-state-tree";
 import { NavigationApp } from "../models/NavigationApp";
-import React from "react";
 
 /**
  * Store for the setting model.
  */
-export class NavigationAppStore {
+export const NavigationAppStore = types.model({
+    items: types.map(NavigationApp),
+});
 
-    @observable items = new Map<string, NavigationApp>();
-
-}
-
-const navigationAppStore = new NavigationAppStore();
-
-export default navigationAppStore;

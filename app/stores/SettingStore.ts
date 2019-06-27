@@ -1,22 +1,12 @@
 /**
- * SettingStore.tsx
+ * SettingStore.ts
  * Copyright Jan-Willem Spuij. All rights reserved.
  */
-import { observable } from "mobx";
 import { Setting } from "../models/Setting";
-import React from "react";
-
+import { types } from "mobx-state-tree";
 /**
  * Store for the setting model.
  */
-class SettingStore {
-
-    @observable item: Setting = new Setting();
-
-}
-
-const settingStore = new SettingStore();
-
-export const SettingStoreContext = React.createContext(settingStore);
-
-export default settingStore;
+export const SettingStore = types.model({
+    item: Setting,
+});

@@ -10,6 +10,7 @@ import { observer, Observer } from "mobx-react";
 import { NavigationAppStore } from "../stores/NavigationAppStore";
 import { computed } from "mobx";
 import { NavigationApp } from '../models/NavigationApp'
+import { Instance } from "mobx-state-tree";
 
   const styles = StyleSheet.create({
     container: {
@@ -50,14 +51,14 @@ import { NavigationApp } from '../models/NavigationApp'
  */
 export interface INavigationAppsProps
 {
-    navigationAppStore: NavigationAppStore
+    navigationAppStore: Instance<typeof NavigationAppStore>
 }
 
 /**
  * Component for the navigation app screen.
  */
 @observer
-export class NavigationAppsScreen extends React.PureComponent<INavigationAppsProps, any> {
+export class NavigationAppsScreen extends React.PureComponent<INavigationAppsProps> {
 
     @computed get navigationAppList() {
         return Array.from(this.props.navigationAppStore.items.values())
@@ -67,19 +68,19 @@ export class NavigationAppsScreen extends React.PureComponent<INavigationAppsPro
         title: 'Navigation Apps',
       }
 
-    keyExtractor = (item: NavigationApp, index: number) => item.package;
+    keyExtractor = (item: Instance<typeof NavigationApp>, index: number) => item.package;
 
     valueChanged = (key: string, value: boolean) => {
         let navigationApp = this.props.navigationAppStore.items.get(key);
         if (navigationApp !== undefined)
         {
-            navigationApp.enabled = value;
+            navigationApp.updateEnabled(value);
         }
     };
 
-    renderItem = ({item} : { item: NavigationApp}) => {
+    renderItem = ({item} : { item: Instance<typeof NavigationApp>}) => {
         return  <Observer>{() => (
-            <NavigationAppListItem name={item.name} package={item.package} icon={item.icon} value={item.enabled} onValueChanged={this.valueChanged} />
+            <NavigationAppListItem name={item.name} package={item.package} icon={require('../../assets/waze.png')} value={item.enabled} onValueChanged={this.valueChanged} />
             )}</Observer>;
     };
 
