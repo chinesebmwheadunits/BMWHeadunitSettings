@@ -42,14 +42,14 @@ export class SettingsScreen extends React.PureComponent<ISettingsScreenProps> {
      * Handles Telephone mute value change.
      */
     readonly telephoneMuteValueChange = (value: boolean) => {
-        this.props.settingStore.item.updateTaskKillerEnabled(value);
+        this.props.settingStore.item.updateTelephoneMuteEnabled(value);
     }
 
     /**
      * Handles Brightness intents value change.
      */
     readonly brightnessIntentsValueChange = (value: boolean) => {
-        this.props.settingStore.item.updateTaskKillerEnabled(value);
+        this.props.settingStore.item.updateBrightnessIntentsEnabled(value);
     }
 
   render() {
