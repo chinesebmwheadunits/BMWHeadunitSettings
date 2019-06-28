@@ -5,7 +5,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { observer } from 'mobx-react';
-import { Setting } from "../models/Setting";
+import { Settings } from "../models/Setting";
 import { computed } from "mobx";
 import { Instance } from "mobx-state-tree";
 
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
  * Interface for properties for settings summary.
  */
 export interface SettingsSummaryProps {
-    setting: Instance<typeof Setting>;
+    setting: Instance<typeof Settings>;
 }
   
 /**

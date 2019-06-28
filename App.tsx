@@ -8,12 +8,12 @@ import { useScreens } from 'react-native-screens';
 import { AppStore } from './app/stores/AppStore';
 import { SettingStore } from './app/stores/SettingStore';
 import { NavigationAppStore } from './app/stores/NavigationAppStore';
-import { Setting } from './app/models/Setting';
+import { Settings } from './app/models/Setting';
 import { applySnapshot, getSnapshot, onSnapshot } from 'mobx-state-tree';
 
 useScreens();
 
-const settingStore = SettingStore.create({ item : Setting.create() });
+const settingStore = SettingStore.create({ item : Settings.create() });
 const navigationAppStore = NavigationAppStore.create({ items: {} });
 const appStore = AppStore.create({
   navigationAppStore: navigationAppStore as any,

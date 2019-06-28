@@ -7,7 +7,7 @@ import { types } from "mobx-state-tree"
 /**
  * Setting model.
  */
-export const Setting = types.model({
+export const Settings = types.model({
     taskKillerEnabled: false,
     telephoneMuteEnabled: true,
     brightnessIntentsEnabled: true,
