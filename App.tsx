@@ -10,7 +10,8 @@ import { SettingStore } from './app/stores/SettingStore';
 import { NavigationAppStore } from './app/stores/NavigationAppStore';
 import { Settings } from './app/models/Setting';
 import { applySnapshot, getSnapshot, onSnapshot } from 'mobx-state-tree';
-
+import axios from 'axios'
+ 
 useScreens();
 
 const settingStore = SettingStore.create({ item : Settings.create() });
@@ -18,6 +19,11 @@ const navigationAppStore = NavigationAppStore.create({ items: {} });
 const appStore = AppStore.create({
   navigationAppStore: navigationAppStore as any,
   settingStore: settingStore as any,
+},
+{
+    axios: axios.create({
+        baseURL: "http://10.0.2.2:21323/"
+    })
 });
 
 const AppNavigator = createStackNavigator(
