@@ -21,11 +21,20 @@ export const SettingStore = types.model({
 
         try {
             let settings = yield axios.get("/settings");
-            // ... yield can be used in async/await style
             self.item = settings.data;
         } catch (error) {
-            // ... including try/catch error handling
             console.error("Failed to fetch settings", error);
+        }
+    }),
+    updateSettings: flow(function* updateSettings() {
+
+        const axios : AxiosInstance = getEnv(self).axios;
+
+        try {
+            let settings = yield axios.post("/settings", self.item);
+            self.item = settings.data;
+        } catch (error) {
+            console.error("Failed to post settings", error);
         }
     })
 }));
