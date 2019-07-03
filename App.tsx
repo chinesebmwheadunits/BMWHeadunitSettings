@@ -26,11 +26,6 @@ const appStore = AppStore.create({
     })
 });
 
-onPatch(settingStore, patch =>
-    {
-        settingStore.updateSettings();
-    })
-
 const AppNavigator = createStackNavigator(
   {
     Home: 
@@ -92,6 +87,15 @@ export default class App extends React.Component {
       const value = JSON.stringify(newSnapshot);
       await AsyncStorage.setItem('appStore', value);
     });
+
+    /**
+     * Register a handler that will update on patches of settings.
+     */
+    onPatch(settingStore, patch =>
+        {
+            settingStore.updateSettings();
+        })
+    
   }
 
   /**
