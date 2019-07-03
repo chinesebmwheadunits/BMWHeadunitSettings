@@ -4,7 +4,7 @@
  */
 import { Settings } from "../models/Setting";
 import { types, getParent, Instance, flow, getEnv } from "mobx-state-tree";
-import { AxiosInstance} from 'axios';
+import { AxiosInstance, AxiosResponse} from 'axios';
 
 /**
  * Store for the setting model.
@@ -20,8 +20,8 @@ export const SettingStore = types.model({
         const axios : AxiosInstance = getEnv(self).axios;
 
         try {
-            const result = yield axios.get("/settings");
-            updateState(self, result.data);
+            const result = yield axios.get<Instance<typeof Settings>>("/settings");
+            updateState(self.item, result.data);
         } catch (error) {
             console.error("Failed to fetch settings", error);
         }
@@ -31,22 +31,27 @@ export const SettingStore = types.model({
         const axios : AxiosInstance = getEnv(self).axios;
 
         try {
-            const result = yield axios.post("/settings", self.item);
-            updateState(self, result.data);
+            const result = yield axios.post<Instance<typeof Settings>>("/settings", self.item);
+            updateState(self.item, result.data);
         } catch (error) {
             console.error("Failed to post settings", error);
         }
     })
 }));
 
-function updateState(self: any, settings: Instance<typeof Settings>) {
-    if (self.item.taskKillerEnabled != settings.taskKillerEnabled) {
-        self.item.taskKillerEnabled = settings.taskKillerEnabled;
+/**
+ * Updates the state based on a fetched item.
+ * @param destination The destination item
+ * @param source The source item.
+ */
+function updateState(destination: Instance<typeof Settings>, source: Instance<typeof Settings>) {
+    if (destination.taskKillerEnabled != source.taskKillerEnabled) {
+        destination.taskKillerEnabled = source.taskKillerEnabled;
     }
-    if (self.item.telephoneMuteEnabled != settings.telephoneMuteEnabled) {
-        self.item.telephoneMuteEnabled = settings.telephoneMuteEnabled;
+    if (destination.telephoneMuteEnabled != source.telephoneMuteEnabled) {
+        destination.telephoneMuteEnabled = source.telephoneMuteEnabled;
     }
-    if (self.item.brightnessIntentsEnabled != settings.brightnessIntentsEnabled) {
-        self.item.brightnessIntentsEnabled = settings.brightnessIntentsEnabled;
+    if (destination.brightnessIntentsEnabled != source.brightnessIntentsEnabled) {
+        destination.brightnessIntentsEnabled = source.brightnessIntentsEnabled;
     }
 }
