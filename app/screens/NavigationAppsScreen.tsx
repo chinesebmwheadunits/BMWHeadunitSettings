@@ -80,7 +80,7 @@ export class NavigationAppsScreen extends React.PureComponent<INavigationAppsPro
 
     renderItem = ({item} : { item: Instance<typeof NavigationApp>}) => {
         return  <Observer>{() => (
-            <NavigationAppListItem name={item.name} package={item.package} icon={require('../../assets/waze.png')} value={item.enabled} onValueChanged={this.valueChanged} />
+            <NavigationAppListItem name={item.name} package={item.package} icon={{ uri: "http://10.0.2.2:21323" + item.icon}} value={item.enabled} onValueChanged={this.valueChanged} />
             )}</Observer>;
     };
 
