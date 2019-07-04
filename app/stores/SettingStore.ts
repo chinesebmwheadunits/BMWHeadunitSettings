@@ -2,7 +2,7 @@
  * SettingStore.ts
  * Copyright Jan-Willem Spuij. All rights reserved.
  */
-import { Settings } from "../models/Setting";
+import { Settings } from "../models/Settings";
 import { types, getParent, Instance, flow, getEnv } from "mobx-state-tree";
 import { AxiosInstance, AxiosResponse} from 'axios';
 
@@ -12,15 +12,12 @@ import { AxiosInstance, AxiosResponse} from 'axios';
 export const SettingStore = types.model({
     item: Settings,
 }).actions(self => ({
-    afterAttach() {
-        this.fetchSettings()
-    },
     fetchSettings: flow(function* fetchSettings() {
 
         const axios : AxiosInstance = getEnv(self).axios;
 
         try {
-            const result = yield axios.get<Instance<typeof Settings>>("/settings");
+            const result = yield axios.get("/settings");
             updateState(self.item, result.data);
         } catch (error) {
             console.error("Failed to fetch settings", error);
@@ -31,7 +28,7 @@ export const SettingStore = types.model({
         const axios : AxiosInstance = getEnv(self).axios;
 
         try {
-            const result = yield axios.post<Instance<typeof Settings>>("/settings", self.item);
+            const result = yield axios.post("/settings", self.item);
             updateState(self.item, result.data);
         } catch (error) {
             console.error("Failed to post settings", error);

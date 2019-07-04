@@ -8,9 +8,11 @@ import { useScreens } from 'react-native-screens';
 import { AppStore } from './app/stores/AppStore';
 import { SettingStore } from './app/stores/SettingStore';
 import { NavigationAppStore } from './app/stores/NavigationAppStore';
-import { Settings } from './app/models/Setting';
+import { Settings } from './app/models/Settings';
 import { applySnapshot, getSnapshot, onSnapshot, onPatch } from 'mobx-state-tree';
 import axios from 'axios'
+import { autorun } from 'mobx';
+import mobx from 'mobx';
  
 useScreens();
 
@@ -58,6 +60,8 @@ const AppNavigator = createStackNavigator(
 
 const AppContainer = createAppContainer(AppNavigator);
 
+autorun(() => console.log(navigationAppStore.items));
+
 /**
  * Root app component.
  */
@@ -85,8 +89,11 @@ export default class App extends React.Component {
      */
     onSnapshot(appStore, async (newSnapshot) => {
       const value = JSON.stringify(newSnapshot);
+      console.log(value);
       await AsyncStorage.setItem('appStore', value);
     });
+
+    await Promise.all([settingStore.fetchSettings(), navigationAppStore.fetchNavigationApps()]);
 
     /**
      * Register a handler that will update on patches of settings.

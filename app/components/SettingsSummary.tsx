@@ -5,7 +5,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { observer } from 'mobx-react';
-import { Settings } from "../models/Setting";
+import { Settings } from "../models/Settings";
 import { computed } from "mobx";
 import { Instance } from "mobx-state-tree";
 

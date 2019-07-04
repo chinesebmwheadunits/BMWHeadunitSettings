@@ -1,5 +1,5 @@
 /**
- * Setting.ts
+ * Settings.ts
  * Copyright Jan-Willem Spuij. All rights reserved.
  */
 import { types } from "mobx-state-tree"
