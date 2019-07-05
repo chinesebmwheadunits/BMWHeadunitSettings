@@ -60,8 +60,6 @@ const AppNavigator = createStackNavigator(
 
 const AppContainer = createAppContainer(AppNavigator);
 
-autorun(() => console.log(navigationAppStore.items));
-
 /**
  * Root app component.
  */
@@ -89,7 +87,7 @@ export default class App extends React.Component {
      */
     onSnapshot(appStore, async (newSnapshot) => {
       const value = JSON.stringify(newSnapshot);
-      console.log(value);
+      console.log("saving snapshot");
       await AsyncStorage.setItem('appStore', value);
     });
 
@@ -101,7 +99,15 @@ export default class App extends React.Component {
     onPatch(settingStore, patch =>
         {
             settingStore.updateSettings();
-        })
+        });
+
+    /**
+     * Register a handler that will update on patches of navigationApps.
+     */
+    onPatch(navigationAppStore, patch =>
+        {
+            navigationAppStore.updateNavigationApps();
+        });
     
   }
 
